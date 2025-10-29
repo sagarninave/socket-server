@@ -1,0 +1,437 @@
+{
+    "swagger": "2.0",
+    "host": "localhost:8000",
+    "info": {
+        "description": "API Documentation",
+        "version": "1.0.0",
+        "title": "Swagger API"
+    },
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "Auth Module",
+            "description": "User authentcation system"
+        }
+    ],
+    "paths": {
+        "/api/v1/auth/signup": {
+            "post": {
+                "tags": [
+                    "Auth Module"
+                ],
+                "description": "Create user",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Signup user",
+                        "schema": {
+                            "$ref": "#/definitions/signup"
+                        }
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created - User signup successfully."
+                    },
+                    "400": {
+                        "description": "Bad Request - Required parameters do not meet the criteria."
+                    },
+                    "409": {
+                        "description": "Conflict - User is already available in the database."
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/verification": {
+            "put": {
+                "tags": [
+                    "Auth Module"
+                ],
+                "description": "Email verification",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "userId",
+                        "description": "User id for verification code",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "token",
+                        "description": "Token for match verification code",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - The request is successfully executed."
+                    },
+                    "404": {
+                        "description": "Not Found - If user verification already done."
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth Module"
+                ],
+                "description": "Login user for the get access",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Login user providing email and password",
+                        "schema": {
+                            "$ref": "#/definitions/login"
+                        }
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - User loggedin successfully."
+                    },
+                    "400": {
+                        "description": "Bad Request - Provided credentials does not meet the criteria."
+                    },
+                    "401": {
+                        "description": "Unauthorized - User does not match email and password."
+                    }
+                }
+            }
+        },
+        "/api/user/forgetpassword/{email}": {
+            "get": {
+                "tags": [
+                    "User Management"
+                ],
+                "description": "Send forget password link through email to set new password to user",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "email",
+                        "description": "Email for forget password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/user/setnewpassword": {
+            "post": {
+                "tags": [
+                    "User Management"
+                ],
+                "description": "Setting new password by forget password link",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Set new password",
+                        "schema": {
+                            "$ref": "#/definitions/setnewpassword"
+                        }
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/user/changepassword": {
+            "post": {
+                "tags": [
+                    "User Management"
+                ],
+                "description": "Change password",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for authenticated user",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Change password",
+                        "schema": {
+                            "$ref": "#/definitions/changepassword"
+                        }
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/user/userprofile/": {
+            "get": {
+                "tags": [
+                    "User Management"
+                ],
+                "description": "User profile",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "User Profile",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/user/edituserprofile": {
+            "put": {
+                "tags": [
+                    "User Management"
+                ],
+                "description": "Update user profile",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User Details to update",
+                        "schema": {
+                            "$ref": "#/definitions/edituserprofile"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token for authenticated user",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request is OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "signup": {
+            "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "example": "Sagar"
+                },
+                "lastName": {
+                    "type": "string",
+                    "example": "Ninave"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "sagarninave@gmail.com"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "Password@123"
+                }
+            }
+        },
+        "login": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "sagarninave@gmail.com"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "Password@123"
+                }
+            }
+        },
+        "setnewpassword": {
+            "required": [
+                "email",
+                "code",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "sagarninave@gmail.com"
+                },
+                "code": {
+                    "type": "string",
+                    "example": "5ff8835a3238ab43d48f3214"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "Password@123"
+                }
+            }
+        },
+        "changepassword": {
+            "required": [
+                "old_password",
+                "new_password",
+                "confirm_password"
+            ],
+            "properties": {
+                "old_password": {
+                    "type": "string",
+                    "example": "Password@123"
+                },
+                "new_password": {
+                    "type": "string",
+                    "example": "Pass@123"
+                },
+                "confirm_password": {
+                    "type": "string",
+                    "example": "Pass@123"
+                }
+            }
+        },
+        "edituserprofile": {
+            "required": [
+                "first_name",
+                "last_name",
+                "username",
+                "phone",
+                "address",
+                "gender",
+                "dob",
+                "social"
+            ],
+            "properties": {
+                "first_name": {
+                    "type": "string",
+                    "example": "Sagar1"
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "Ninave1"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "sagarninave1"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "9096514816"
+                },
+                "address": {
+                    "type": "string",
+                    "example": "mumbai"
+                },
+                "gender": {
+                    "type": "string",
+                    "example": "male"
+                },
+                "dob": {
+                    "type": "string",
+                    "example": "1996-06-08"
+                },
+                "social": {
+                    "type": "object",
+                    "example": {
+                        "facebook": "facebook.com/sagarninave1",
+                        "instagram": "instagram.com/sagarninave1",
+                        "linkedin": "linkedin.com/sagarninave1",
+                        "twitter": "twitter.com/sagarninave1"
+                    }
+                }
+            }
+        }
+    }
+}
