@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../src/postman/user/index.ts"],"names":[],"mappings":";;;;;AAAA,2DAA+C;AAC/C,wDAAuC;AACvC,oEAAgD;AAChD,sEAA8C;AAC9C,kFAA0D;AAE1D,MAAM,UAAU,GAAG,IAAI,8BAAS,CAAC;IAC/B,IAAI,EAAE,MAAM;IACZ,IAAI,EAAE;QACJ,iBAAc;QACd,uBAAiB;QACjB,wBAAc;QACd,8BAAoB;KACrB;CACF,CAAC,CAAC;AAEH,kBAAe,UAAU,CAAC"}

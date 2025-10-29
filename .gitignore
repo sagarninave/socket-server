@@ -1,0 +1,9 @@
+.vscode
+.env
+node_modules
+combined.log
+error.log
+info.log
+logs
+storage
+src/postman/output
