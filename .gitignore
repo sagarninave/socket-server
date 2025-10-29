@@ -6,4 +6,6 @@ error.log
 info.log
 logs
 storage
+# dist
+# build
 src/postman/output
